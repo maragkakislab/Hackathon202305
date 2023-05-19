@@ -19,7 +19,7 @@ We have half-life measurements from the following sources:
 - hsa various from Tani's Supplementary Tables
 
 # Features:
-## From Ensembl:
+## From Ensembl (v92):
 - Exonic lengths (UTR5 - CDS - UTR3)
 - GC content (need to get) 
 
