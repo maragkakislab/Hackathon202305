@@ -1,8 +1,15 @@
 # Hackathon202305
 Our first hackathon!
 
+# When:
+Monday May 22 is the Neural Network workshop
+
+Tuesday May 23 is the Hackathon
+
+10am to when our food runs out.
+
 # The what:
-For each gene, we want to be able to predict its decay rate, i.e. half-life or equivalent measures,.
+For each gene, we want to be able to predict its decay rate, i.e. half-life or equivalent measures, using propoerties of genes.
 
 # Validation data:
 We have half-life measurements from the following sources:
@@ -12,12 +19,16 @@ We have half-life measurements from the following sources:
 - hsa various from Tani's Supplementary Tables
 
 # Features:
-From Ensembl:
+## From Ensembl:
+- Gene lengths
 
-
-From the lab:
+## From the lab:
 - mmu 3T3: one MION one PION
 - hsa HeLa
+
+Getting:
+- Expression data
+- Slide parameters: Proportion of full-length reads, max poly(A)-tail length
 
 # Misc tips:
 - Open drinks need to be two spill distances away from any computer
