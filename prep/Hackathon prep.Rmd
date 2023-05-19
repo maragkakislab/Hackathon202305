@@ -1,0 +1,35 @@
+---
+title: "Hackathon prep"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Every transcript needs the following features:
+N reads
+length of all reads (Separate file)
+length of all polya tails (Separate file)
+slide parameters for length: max length, proportion at max length
+slide parameters for polya: max length, proportion at max length
+annotated transcript length, UTR3, UTR5, exonic length, CDS length
+GC content?
+meta UTR5 and UTR5 positions?
+
+Datasets:
+mmu 3T3 Mion, 3T3 PION
+hsa HeLa
+
+Output:
+half-life
+
+Datasets:
+Sharova et al - ESC mice
+Eisen et al - 3t3 mice
+
+
+```{r}
+
+
+```
