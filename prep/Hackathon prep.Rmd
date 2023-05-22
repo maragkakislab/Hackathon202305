@@ -14,8 +14,7 @@ length of all polya tails (Separate file)
 slide parameters for length: max length, proportion at max length
 slide parameters for polya: max length, proportion at max length
 annotated transcript length, UTR3, UTR5, exonic length, CDS length
-GC content?
-meta UTR5 and UTR5 positions?
+GC content
 
 Datasets:
 mmu 3T3 Mion, 3T3 PION
@@ -27,9 +26,12 @@ half-life
 Datasets:
 Sharova et al - ESC mice
 Eisen et al - 3t3 mice
+Tani et al - HeLa human
+Supplementary from Tani et al - various human
 
 
-```{r}
-
-
-```
+Data cleaning To do:
+1. Decide on which features to use and merge them into one table
+1.5. Translate transcript data to gene data
+2. Extract relevant columns from the excel sheets to make validation data
+3. Merge features and validation by gene names
