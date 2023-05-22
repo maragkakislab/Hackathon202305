@@ -9,7 +9,7 @@ Tuesday May 23 is the Hackathon
 10am to when our food runs out.
 
 # The what:
-For each gene, we want to be able to predict its decay rate, i.e. half-life or equivalent measures, using propoerties of genes.
+For each gene, we want to be able to predict its decay rate, i.e. half-life or equivalent measures, using properties of genes.
 
 # Validation data:
 We have half-life measurements from the following sources:
@@ -19,14 +19,15 @@ We have half-life measurements from the following sources:
 - hsa various from Tani's Supplementary Tables
 
 # Features:
-## From Ensembl:
-- Gene lengths
+## From Ensembl (v92):
+- Exonic lengths (UTR5 - CDS - UTR3)
+- GC content (need to get) 
 
 ## From the lab:
-- mmu 3T3: one MION one PION
+- mmu 3T3: two samples (one MION, one PION)
 - hsa HeLa
 
-Getting:
+To obtain:
 - Expression data
 - Slide parameters: Proportion of full-length reads, max poly(A)-tail length
 
