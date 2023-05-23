@@ -61,5 +61,16 @@ rule join_features:
             -d {params.key2} > {output.joined_table}
         """
 
+rule expand_hist_cols:
+    input:
+        a="prep/experiments/{s}/joined_features.tab"
+    output:
+        a="prep/experiments/{s}/joined_features_expanded.tab"
+    run:
+        import pandas as pd
 
-
+        df = pd.read_csv(input.a, sep = "\t", header = 0)
+        df[["hist5p_"+i for i in range(9)]] = df['hist5p'].str.split(',', expand = True)
+        df[["hist3p_"+i for i in range(9)]] = df['hist3p'].str.split(',', expand = True)
+        df.drop(["hist5p","hist3p"], inplace = True)
+        df.to_csv(output.a, index = False)
