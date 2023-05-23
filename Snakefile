@@ -5,11 +5,14 @@ samples = [
         "mmu_dRNA_3T3_PION_1",
         ]
 
+
 rule run_all:
     input:
         expand("prep/experiments/{s}/transcript_bin_distribution.tab", s = samples),
         expand("prep/experiments/{s}/joined_features.tab", s=samples),
         expand("prep/experiments/{s}/joined_features_expanded.tab", s=samples),
+        expand("prep/experiments/{s}/joined_features_expanded_agg{type}.tab", s = samples, type = "max")
+
 
 rule run_extract_bam_features:
     input:
@@ -33,6 +36,7 @@ rule run_extract_bam_features:
                 > {output.meta_coords}
         """
 
+
 rule aggregate_transcript_meta_features:
     input:
         meta_coords = "{s}.meta_coordinates.tab",
@@ -45,6 +49,7 @@ rule aggregate_transcript_meta_features:
                 --bins 10 \
                 > {output.transcr_bin_distro}
         """
+
 
 rule join_features:
     input:
@@ -61,6 +66,7 @@ rule join_features:
             -d {params.key2} > {output.joined_table}
         """
 
+
 rule expand_hist_cols:
     input:
         a="prep/experiments/{s}/joined_features.tab"
@@ -70,8 +76,23 @@ rule expand_hist_cols:
         import pandas as pd
 
         df = pd.read_csv(input.a, sep = "\t", header = 0)
-        print(["hist5p_"+str(i) for i in range(10)])
         df[["hist5p_"+str(i) for i in range(10)]] = df['hist5p'].str.split(',', expand = True)
         df[["hist3p_"+str(i) for i in range(10)]] = df['hist3p'].str.split(',', expand = True)
         df.drop(["hist5p","hist3p"], axis=1, inplace = True)
         df.to_csv(output.a, index = False)
+
+
+rule aggregate_features:
+    input:
+        "prep/experiments/{s}/joined_features_expanded.tab"
+    output:
+        "prep/experiments/{s}/joined_features_expanded_agg{type}.tab"
+    shell:
+        """
+        ./prep/scripts/agg_per_gene.py \
+            -f {input} \
+            -g gene \
+            -c n_readlength \
+            -t {wildcards.type} \
+            -o {output}
+        """
