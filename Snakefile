@@ -79,7 +79,7 @@ rule expand_hist_cols:
         df[["hist5p_"+str(i) for i in range(10)]] = df['hist5p'].str.split(',', expand = True)
         df[["hist3p_"+str(i) for i in range(10)]] = df['hist3p'].str.split(',', expand = True)
         df.drop(["hist5p","hist3p"], axis=1, inplace = True)
-        df.to_csv(output.a, index = False)
+        df.to_csv(output.a, index = False, sep = "\t")
 
 
 rule aggregate_features:
@@ -94,5 +94,20 @@ rule aggregate_features:
             -g gene \
             -c n_readlength \
             -t {wildcards.type} \
+            -d '\t' \
             -o {output}
         """
+
+rule clean_halflives:
+    input:
+        a="prep/experiments/{s}/joined_features_expanded_agg{type}.tab"
+    output:
+        a="prep/experiments/{s}/joined_features_expanded_agg{type}_cleaned.tab"
+    run:
+        import pandas as pd
+
+        df = pd.read_csv(input.a, sep = "\t", header = 0)
+        df = df[df["t5"] != "--"]
+        df["t5"] = pd.to_numeric(df["t5"])
+        df[(df["t5"] > 0.1) & (df["t5"]<12)]
+        df.to_csv(output.a, index = False, sep = "\t")
