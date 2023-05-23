@@ -108,6 +108,6 @@ rule clean_halflives:
 
         df = pd.read_csv(input.a, sep = "\t", header = 0)
         df = df[df["t5"] != "--"]
-        df = df["t5"] = pd.to_numeric(df["t5"])
+        df["t5"] = pd.to_numeric(df["t5"])
         df = df[(df["t5"] > 0.1) & (df["t5"]<12)]
         df.to_csv(output.a, index = False, sep = "\t")
