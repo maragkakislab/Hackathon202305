@@ -35,3 +35,14 @@ Data cleaning To do:
 1.5. Translate transcript data to gene data
 2. Extract relevant columns from the excel sheets to make validation data
 3. Merge features and validation by gene names
+
+Data on the LGG server:
+bam:
+`/home/leect/workspace/slide/samples/{sample}/align/reads.sanitize.noribo.toTranscriptome.sorted.bam`
+
+polya lengths:
+`/home/leect/workspace/slide/analysis/slide_polya/{sample}/polyA_read_length.tab`
+
+read lengths:
+`/home/leect/workspace/slide/analysis_old/length/{sample}/nanoplen_read_length_non_zero_ids.tab`
+
