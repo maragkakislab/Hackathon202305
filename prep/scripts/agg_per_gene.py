@@ -7,6 +7,7 @@ parser.add_argument("-f", "--file", help="file containing transcript level infor
 parser.add_argument("-g", "--group_col", help="column name to group by")
 parser.add_argument("-c", "--counts_col", help="column name to calculate weights")
 parser.add_argument("-t", "--agg_type", help="type of aggregation to perform: max, mean")
+parser.add_argument("-d", "--delim", help="delimiter. Default comma", default=",")
 parser.add_argument("-o", "--output_file", help="path and name of output file")
 
 
@@ -18,7 +19,7 @@ def weighted_mean(df, weight_col, agg_col):
     return weighted_mean
 
 def load_csv(fpath):
-    df = pd.read_csv(fpath, sep=",", header=0)
+    df = pd.read_csv(fpath, sep=args.delim, header=0)
     return df
 
 def save_csv(df, out):
@@ -41,5 +42,5 @@ else:
     print("pick either mean or max for agg_type.")
     quit()
                                 
-save_csv(df, args.output_file)
+save_csv(df, args.output_file, sep = args.delim)
 
