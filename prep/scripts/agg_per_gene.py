@@ -23,7 +23,7 @@ def load_csv(fpath):
     return df
 
 def save_csv(df, out):
-    df.to_csv(out, index=False)
+    df.to_csv(out, index=False, sep = args.delim)
 
 df = load_csv(args.file)
                                 
@@ -42,5 +42,5 @@ else:
     print("pick either mean or max for agg_type.")
     quit()
                                 
-save_csv(df, args.output_file, sep = args.delim)
+save_csv(df, args.output_file)
 
