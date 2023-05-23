@@ -37,6 +37,13 @@ Data cleaning To do:
 3. Merge features and validation by gene names
 
 Data on the LGG server:
+Samples:
+```
+["hsa_dRNA_HeLa_DRB_0h_1",
+"mmu_dRNA_3T3_mion_1",
+"mmu_dRNA_3T3_PION_1"]
+```
+
 bam:
 `/home/leect/workspace/slide/samples/{sample}/align/reads.sanitize.noribo.toTranscriptome.sorted.bam`
 
@@ -45,4 +52,3 @@ polya lengths:
 
 read lengths:
 `/home/leect/workspace/slide/analysis_old/length/{sample}/nanoplen_read_length_non_zero_ids.tab`
-
