@@ -11,7 +11,7 @@ rule run_all:
         expand("prep/experiments/{s}/transcript_bin_distribution.tab", s = samples),
         expand("prep/experiments/{s}/joined_features.tab", s=samples),
         expand("prep/experiments/{s}/joined_features_expanded.tab", s=samples),
-        expand("prep/experiments/{s}/joined_features_expanded_agg{type}.tab", s = samples, type = "max")
+        expand("prep/experiments/{s}/joined_features_expanded_agg{type}_cleaned.tab", s = samples, type = "max")
 
 
 rule run_extract_bam_features:
