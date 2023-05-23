@@ -89,7 +89,7 @@ rule aggregate_features:
         "prep/experiments/{s}/joined_features_expanded_agg{type}.tab"
     shell:
         """
-        ./prep/scripts/agg_per_gene.py \
+        python prep/scripts/agg_per_gene.py \
             -f {input} \
             -g gene \
             -c n_readlength \
