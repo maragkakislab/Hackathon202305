@@ -4,6 +4,7 @@ import csv
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("-i", "--input")
+parser.add_argument("-b", "--bins", default = 20)
 args = parser.parse_args()
 
 def normalize(x):
@@ -18,8 +19,8 @@ with open(args.input, 'r') as file:
         transcript = row[2]
         if transcript not in aggregated_data:
             aggregated_data[transcript] = {
-                '5p': [0 for i in range(0,20)],
-                '3p': [0 for i in range(0,20)]}
+                '5p': [0 for i in range(0,args.bins)],
+                '3p': [0 for i in range(0,args.bins)]}
         aggregated_data[transcript]['5p'][int(row[3])] += 1
         aggregated_data[transcript]['3p'][int(row[4])] += 1
 

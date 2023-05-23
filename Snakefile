@@ -6,11 +6,10 @@ samples = [
         ]
 
 rule run_all:
-    input: 
+    input:
         expand("prep/experiments/{s}/transcript_bin_distribution.tab", s = samples),
-        expand("prep/experiments/{s}/joined_features.tab", s=samples)
-
-
+        expand("prep/experiments/{s}/joined_features.tab", s=samples),
+        expand("prep/experiments/{s}/joined_features_expanded.tab", s=samples),
 
 rule run_extract_bam_features:
     input:
@@ -43,18 +42,19 @@ rule aggregate_transcript_meta_features:
         """
         python scripts/aggregate-transcript-meta-features.py \
                 --input {input.meta_coords} \
+                --bins 10 \
                 > {output.transcr_bin_distro}
         """
 
 rule join_features:
-    input: 
+    input:
         transcr_bin_distro = "prep/experiments/{s}/transcript_bin_distribution.tab",
         transc_feature = "prep/experiments/{s}/features_v1.csv"
     params: key1 = "transcript", key2 = "transcript_id"
     output: joined_table = "prep/experiments/{s}/joined_features.tab"
     shell:
         """
-        awk 'BEGIN {{ FS = \",\"; OFS = \"\t\" }} {{$1=$1; print }}' {input.transc_feature} | 
+        awk 'BEGIN {{ FS = \",\"; OFS = \"\t\" }} {{$1=$1; print }}' {input.transc_feature} |
             table-join.py -t - \
             -g {input.transcr_bin_distro} \
             -c {params.key1} \
@@ -70,7 +70,8 @@ rule expand_hist_cols:
         import pandas as pd
 
         df = pd.read_csv(input.a, sep = "\t", header = 0)
-        df[["hist5p_"+i for i in range(9)]] = df['hist5p'].str.split(',', expand = True)
-        df[["hist3p_"+i for i in range(9)]] = df['hist3p'].str.split(',', expand = True)
-        df.drop(["hist5p","hist3p"], inplace = True)
+        print(["hist5p_"+str(i) for i in range(10)])
+        df[["hist5p_"+str(i) for i in range(10)]] = df['hist5p'].str.split(',', expand = True)
+        df[["hist3p_"+str(i) for i in range(10)]] = df['hist3p'].str.split(',', expand = True)
+        df.drop(["hist5p","hist3p"], axis=1, inplace = True)
         df.to_csv(output.a, index = False)
