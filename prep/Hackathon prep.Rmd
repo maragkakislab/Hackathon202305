@@ -52,3 +52,12 @@ polya lengths:
 
 read lengths:
 `/home/leect/workspace/slide/analysis_old/length/{sample}/nanoplen_read_length_non_zero_ids.tab`
+
+
+```{r}
+Eisen = readxl::read_xlsx("data/Eisen/1-s2.0-S1097276519308962-mmc2.xlsx")
+
+Eisen = Eisen[-1, c(1,2,13)]
+
+write.table(Eisen, "data/Eisen/Eisen_HL_cleaned.txt", quote = F, sep = "\t", row.names = F, col.names = F)
+```
