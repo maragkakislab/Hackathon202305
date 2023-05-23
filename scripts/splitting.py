@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def train_test_split_df(df, train_portion, verbose=False):
+def train_test_split_df(df, train_portion=0.8, verbose=False):
     """
     Splits dataframe into train and test split based on unique genes
     """
