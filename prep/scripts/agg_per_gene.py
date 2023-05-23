@@ -29,12 +29,13 @@ df = load_csv(args.file)
 if args.agg_type == "mean":
     ## TO DO ## add dropped columns warning
     cols = df.select_dtypes(include=['float64']).columns
-    df.groupby(df[args.group_col]).apply(
+    df = df.groupby(args.group_col).apply(
         lambda x: pd.Series(
         {cols[i]:weighted_mean(x, args.counts_col,cols[i]) for i in range(0,len(cols))}))
+    df = df["sum_"+args.counts_col] = df.groupby(args.group_col)[args.counts_col].sum().values
 
 elif args.agg_type == "max":
-    df.loc[df.groupby(args.group_col)[args.counts_col].idxmax()]
+    df = df.loc[df.groupby(args.group_col)[args.counts_col].idxmax()]
 
 else:
     print("pick either mean or max for agg_type.")
