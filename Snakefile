@@ -86,7 +86,7 @@ rule aggregate_features:
     input:
         "prep/experiments/{s}/joined_features_expanded.tab"
     output:
-        "prep/experiments/{s}/joined_features_expanded_agg{type}.tab"
+        "prep/experiments/{s}/joined_features_expanded_agg{type}_.tab"
     shell:
         """
         python prep/scripts/agg_per_gene.py \
@@ -100,7 +100,7 @@ rule aggregate_features:
 
 rule clean_halflives:
     input:
-        a="prep/experiments/{s}/joined_features_expanded_agg{type}.tab"
+        a="prep/experiments/{s}/joined_features_expanded_agg{type}_.tab"
     output:
         a="prep/experiments/{s}/joined_features_expanded_agg{type}_cleaned.tab"
     run:
